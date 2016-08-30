@@ -58,6 +58,9 @@ app.post('/webhook', function (req, res) {
         pageEntry.messaging.forEach(messagingEvent => {
           
           bm.manageEvent(messagingEvent, session, (updatedSession) => {
+
+            currentSessions[sessionID] = updatedSession;
+            
             if (updatedSession.context.endSession) {
               console.log("Restarting session");
               delete currentSessions[sessionID];
